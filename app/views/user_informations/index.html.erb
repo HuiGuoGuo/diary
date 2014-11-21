@@ -1,0 +1,21 @@
+<h1>Listing user_informations</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_informations.each do |user_information| %>
+  <tr>
+    <td><%= link_to 'Show', user_information %></td>
+    <td><%= link_to 'Edit', edit_user_information_path(user_information) %></td>
+    <td><%= link_to 'Destroy', user_information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User information', new_user_information_path %>

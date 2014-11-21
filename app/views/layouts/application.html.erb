@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diary</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link type="text/css" rel="stylesheet" media="all" href="/assets/style__not-minified.css?body=1" data-turbolinks-track="true">
+    <script type="text/javascript" src="/assets/bootstrap.js?body=1" data-turbolinks-track="true">
+    </script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="navigation">
+      <div class="container-fluid">
+        <div class="user">
+          <%=render 'layouts/header'%>
+        </div>
+      </div>
+    </div>
+    <%unless params[:controller] =='user_informations' %>
+      <div class='container' > 
+      <%end%>
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<h1>Listing attachment_images</h1>
+
+<table>
+  <tr>
+    <th>Attachment image file name</th>
+    <th>Attachment image content type</th>
+    <th>Attachment image file size</th>
+    <th>Attachment image updated at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @attachment_images.each do |attachment_image| %>
+  <tr>
+    <td><%= attachment_image.attachment_image_file_name %></td>
+    <td><%= attachment_image.attachment_image_content_type %></td>
+    <td><%= attachment_image.attachment_image_file_size %></td>
+    <td><%= attachment_image.attachment_image_updated_at %></td>
+    <td><%= link_to 'Show', attachment_image %></td>
+    <td><%= link_to 'Edit', edit_attachment_image_path(attachment_image) %></td>
+    <td><%= link_to 'Destroy', attachment_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Attachment image', new_attachment_image_path %>

@@ -1,0 +1,51 @@
+<%= form_for(@blog,:html => {:class => 'form-horizontal form-column form-bordered'}) do |f| %>
+  <% if @blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+        <% @blog.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+      <% f.label :title %>题目<br />
+      <%= f.text_field :title %>
+
+    <div class="field">
+      <% f.label :tags %> 标签<br />
+      <%= f.text_field :tags, :class => 'tagsinput',:style=>"width: 40px; height: auto;"%>
+    </div>
+
+  </br>
+  <div class="field">
+    <% f.label :context %>内容<br />
+    <%= f.kindeditor :context, :width => 1200, :height => 800 %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit '发表',:class=>'btn btn' %>
+    <button name='button' type='submit'><i class="icon-envelope"></i></button>
+  </div>
+<% end %>
+
+<script type='text/css'>
+
+  .tagsinput[id$="_tagsinput"] {
+    padding-bottom: 0;
+  }
+  .tagsinput[id$="_tagsinput"] .tag {
+    background: none repeat scroll 0 0 #368ee0;
+    border: 0 none;
+    border-radius: 0;
+    color: #333;
+  }
+  .tagsinput[id$="_tagsinput"] .tag a {
+    color: #fff;
+  }
+</script>
+

@@ -1,0 +1,19 @@
+zh:
+  activerecord:
+    models:
+      user: '用户'
+      blog: '博客'
+    attributes:
+      user:
+        id: 'ID'
+        username: '登录名'
+        group_id: '客户组'
+        password: '密码'
+        password_confirmation: '确认密码'
+      department:
+        name: '部门名'
+        id: 'ID'
+        desc: '描述'
+      blog:
+        title: '题目'
+        context: '博客内容'

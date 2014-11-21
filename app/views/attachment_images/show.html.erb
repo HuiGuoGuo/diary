@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Attachment image file name:</b>
+  <%= @attachment_image.attachment_image_file_name %>
+</p>
+
+<p>
+  <b>Attachment image content type:</b>
+  <%= @attachment_image.attachment_image_content_type %>
+</p>
+
+<p>
+  <b>Attachment image file size:</b>
+  <%= @attachment_image.attachment_image_file_size %>
+</p>
+
+<p>
+  <b>Attachment image updated at:</b>
+  <%= @attachment_image.attachment_image_updated_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_attachment_image_path(@attachment_image) %> |
+<%= link_to 'Back', attachment_images_path %>
