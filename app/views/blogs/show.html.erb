@@ -1,15 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class='margin_every'>
+  <p>
   <b>Title:</b>
   <%= @blog.title %>
-</p>
+  </p>
 
-<p>
+  <p>
   <b>Context:</b>
   <%= @blog.context.html_safe %>
-</p>
+  </p>
 
+  <%=form_tag comments_path , :method => :post do |f| %>
+  <label >评论</label>
+  <%= kindeditor :comment, :context%>
+  <%= submit_tag '确定'%>
+  <%end%>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+</div>
+
+<%= link_to '编辑', edit_blog_path(@blog) %> |
+<%= link_to '返回列表', blogs_path %>

@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :set_comment, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :xml, :json
 
   def index
     @comments = Comment.all
@@ -16,11 +17,13 @@ class CommentsController < ApplicationController
   end
 
   def edit
+
   end
 
   def create
     @comment = Comment.new(params[:comment])
     @comment.save
+    flash[:notice] = 'successful!'
     respond_with(@comment)
   end
 

@@ -6,6 +6,9 @@
     -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
     box-shadow: inset 0 0 100px rgba(0,0,0,.5);
   }
+  .ctl{
+    white-space:nowrap;text-overflow:ellipsis;overflow:hidden;length:200px;
+  }
   .ctl{table-layout:fixed}
 
   .ctl td{text-overflow:ellipsis;overflow:hidden;white-space:nowrap;padding:2px}
@@ -13,7 +16,7 @@
 
 <body style='background-image:url(/assets/8f456ccc38721f2c4318a5f7049f8.jpg);background-attachment: fixed;color:white; overflow:scoll;background-size: 100%;'>
 
-  <div class="site-wrapper"style='margin:auto;opacity: 0.9;margin-right:190px;margin-left:16px;margin-top:100px;margin-bottom:40px'>
+  <div class="site-wrapper margin_every">
     <div class="row-fluid">
       <div class='span1'>
         <div class="pinned note-container" style="width: 262px; left: 1200px; top: 10px; position: fixed;opacity: 0.5;background-size: 100%;"</div>
@@ -28,7 +31,7 @@
 
     <div class="span12">
       <% Blog.all.each do |blog|%>
-        <div class="row-fluid">
+        <div class="row-fluid" style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;length:100px;' >
           <div class="panel post tag-xin-ban-ben-fa-bu">
             <div class="preview-img">
               <a href = ''><img alt ='' src=''></a>
@@ -55,23 +58,23 @@
                   </span>
                   <span class="author">
                     <i class="icon-user"></i>
-                    <%= blog.user.username if blog.user%>
+                    <%= blog.user.try(:username)%>
                     <%= '匿名' if blog.user.blank?%>
                   </span>
                 </div>
-                <div class='post-text ctl'style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>
+                <div style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:200px;'>
                   <p>
                   <%= blog.context.html_safe%> 
                   </p>
                 </div>
               </div>
             </div>
-          <section class="panel-footer post-meta">
-          <div class="post-tags">
-            <i class="fa fa-tags"></i>
-            <a href="">查看更多请点击这里。。。</a>
-          </div>
-          </section>
+            <section class="panel-footer post-meta">
+            <div class="post-tags">
+              <i class="fa fa-tags"></i>
+              <%= link_to '查看更多请点击这里。。。',blog_path(blog)%>
+            </div>
+            </section>
           </div>
         </div>
       <%end%>
@@ -85,3 +88,4 @@
   <a class="gototop" href="#"><i class="icon-arrow-up"></i></a>
 </div>
 </body>
+
