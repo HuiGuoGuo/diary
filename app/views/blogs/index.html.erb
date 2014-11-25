@@ -1,28 +1,28 @@
-</br>
-<%= link_to 'New Blog', new_blog_path %>
+<div class='margin_every'>
+  <%= link_to 'New Blog', new_blog_path %>
 
-<table class="table table-striped" >
-  <tr>
-    <td>博客</td>
-    <td></td>
-  </tr>
-
-  <% @blogs.each do |blog| %>
-    <tr class='title'>
-      <td><%= link_to blog.title, blog %></td>
-      <td>
-        <%=blog.created_at.strftime("%Y-%m-%d")%>
-        <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> 管理 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"style="opacity: 0.9;">
-            <li><%= link_to '编辑', edit_blog_path(blog) %></li>
-            <li><%= link_to '删除', blog, method: :delete, data: { confirm: 'Are you sure?' } %></li>         
-          </ul>
-        </div>
-      </td>
+  <table class="table table-striped" >
+    <tr>
+      <td>博客</td>
+      <td></td>
     </tr>
-  <% end %>
-</table>
-<br />
+
+    <% @blogs.each do |blog| %>
+      <tr class='title'>
+        <td><%= link_to blog.title, blog %></td>
+        <td>
+          <%=blog.created_at.strftime("%Y-%m-%d")%>
+          <div class="btn-group ">
+            <a class="btn dropdown-toggle btn-small btn-orange" data-toggle="dropdown" href="#"> 管理 <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"style="opacity: 0.9;">
+              <li><%= link_to '编辑', edit_blog_path(blog) %></li>
+              <li><%= link_to '删除', blog, method: :delete, data: { confirm: '确定删除?' } %></li>         
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 

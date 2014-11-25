@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(User)
       if User.count == 1
         resource.add_role 'admin'
+      else
+        resource.add_role 'customer'
       end
       resource
     end

@@ -1,6 +1,10 @@
 Diary::Application.routes.draw do
 
-  resources :user_informations
+  resources :user_informations do
+    member do
+      get 'render_user_information'
+    end
+  end
 
   resources :comments
 

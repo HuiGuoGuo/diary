@@ -13,7 +13,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
 //= require kindeditor
 //= require ckeditor-jquery
 //= require_tree .

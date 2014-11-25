@@ -1,23 +1,79 @@
 <p id="notice"><%= notice %></p>
 
 <div class='margin_every'>
-  <p>
-  <b>Title:</b>
-  <%= @blog.title %>
-  </p>
+  <h3>
+    <b>题目:</b>
+    <%= @blog.title %>
+  </h3>
 
-  <p>
-  <b>Context:</b>
-  <%= @blog.context.html_safe %>
-  </p>
+  <b>博文内容:</b>
+  <div class='blog_context'>
+    <%= @blog.context.html_safe %>
+  </div>
 
-  <%=form_tag comments_path , :method => :post do |f| %>
-  <label >评论</label>
-  <%= kindeditor :comment, :context%>
-  <%= submit_tag '确定'%>
+  </br>
+  </br>
+  </br>
+  </br>
+
+  <label > 评论:</label>
+  </br>
+  <%@blog.comments.each do |comment|%>
+    <div class='comments-item-bd'>
+
+      <div class='ui-avatar'>
+        <img src='<%= comment.user.user_information.attachment_image.attachment_image.url%>' width='60px' height='60px'> &nbsp;&nbsp;&nbsp;
+      </div>
+
+      <div class='comments-content'>
+
+        <%= comment.user.try(:username)%>&nbsp;&nbsp;:&nbsp;&nbsp;
+        <span style='margin-left:60px;'><%= comment.context.html_safe%></span>
+
+        <div class='comments-op'>
+          <span class=" ui-mr10 state"> 17:05</span>
+          <span><%= link_to '回复','#'%></span>
+        </div>
+
+      </div>
+
+    </div>
+    </br>
   <%end%>
-
+  </br>
+  </br>
+  <div>
+    <%=form_tag comments_path(:blog_id => @blog.id, :user_id => current_user.id) ,{:method => :post, :remote => true}  do |f| %>
+      </br>
+      <%= kindeditor :comment, :context,:width => '50',:height => '40',:simple_mode => true%>
+      </br>
+      <%= link_to '编辑', edit_blog_path(@blog),:class => 'btn btn-small' %> 
+      <%= link_to '返回列表', blogs_path,:class => 'btn btn-small' %>
+      <%= submit_tag '确定',:class => 'btn btn-small'%>
+    <%end%>
+  </div>
 </div>
 
-<%= link_to '编辑', edit_blog_path(@blog) %> |
-<%= link_to '返回列表', blogs_path %>
+<style type='text/css'>
+  .blog_context{ /*博文内容样式*/
+    width:1000px;
+    height:800px;
+    overflow:auto;
+  }
+  .image_head{
+    width:60px;
+    height:60px;
+    float:left;
+    position:relative;
+    left:-80px;
+    margin-left:80px;
+  }
+  .image_username{
+    width:500px;
+    height:60px;
+    float:left;
+    position:relative;
+    left:-70px;
+  }
+</style>
+

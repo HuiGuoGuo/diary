@@ -21,7 +21,11 @@
       <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-user"></i> <%= current_user.username %></a>
       <ul class="dropdown-menu pull-right">
         <li>
-        <a href="/user_informations/<%=current_user.id%>/edit">个人中心</a>
+        <% if current_user.user_information %>
+          <a href="/user_informations/<%=current_user.user_information.id%>">个人中心</a>
+        <%else%>
+          <a href="/user_informations/new">添加个人信息</a>
+        <%end%>
         </li>
         <li>
         <%= link_to 'Logout', destroy_user_session_path, :style => "font-size: 14px" %>

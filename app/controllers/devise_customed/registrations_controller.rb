@@ -11,9 +11,15 @@ class DeviseCustomed::RegistrationsController < Devise::RegistrationsController
 
     @user = User.new(params[:user])
 
+
     respond_to do |format|
       if @user.save
-        format.html { redirect_to new_session_path, notice: '创建用户成功.' }
+        #创建用户资料
+        user_information = UserInformation.new
+        user_information.user_id = @user.id
+        user_information.save
+
+        format.html { redirect_to new_session_path(:user), notice: '创建用户成功.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

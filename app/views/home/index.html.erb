@@ -1,18 +1,3 @@
-<script type='text/css'>
-  .site-wrapper {
-    display: table;
-    height: 100%; /* For at least Firefox */
-    min-height: 100%;
-    -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-    box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-  }
-  .ctl{
-    white-space:nowrap;text-overflow:ellipsis;overflow:hidden;length:200px;
-  }
-  .ctl{table-layout:fixed}
-
-  .ctl td{text-overflow:ellipsis;overflow:hidden;white-space:nowrap;padding:2px}
-</script>
 
 <body style='background-image:url(/assets/8f456ccc38721f2c4318a5f7049f8.jpg);background-attachment: fixed;color:white; overflow:scoll;background-size: 100%;'>
 
@@ -36,7 +21,9 @@
             <div class="preview-img">
               <a href = ''><img alt ='' src=''></a>
               <div class='post-context'style='color:#333;margin-left:20px;margin-top:20px;'>
-                <h4 class='post-title'style='color:white'><%=link_to blog.title ,blog_path(blog),:method => :get%></h4>
+                <h3 class='post-title'style='color:white'><%=link_to blog.title ,blog_path(blog),:method => :get%></h3>
+                </br>
+                </br>
                 <div class="post-meta">
                   <span class="date">
                     <i class="icon-calendar"></i>
@@ -44,7 +31,7 @@
                   </span>
                   <span class="comments">
                     <i class="icon-comments"></i>
-                    <a href="#">5 评论</a>
+                    <a href="<%=blog_path(blog)%>"><%=blog.try(:comments).count%>评论</a>
                   </span>
                   <span class="tags">
                     <i class="icon-tag"></i>
@@ -58,8 +45,11 @@
                   </span>
                   <span class="author">
                     <i class="icon-user"></i>
-                    <%= blog.user.try(:username)%>
-                    <%= '匿名' if blog.user.blank?%>
+                    <% if blog.user.blank?%>
+                      <%= '匿名' %>
+                    <%else%>
+                      <%= link_to blog.user.username, user_information_path(:id => blog.user.user_information.id)%>
+                    <%end%>
                   </span>
                 </div>
                 <div style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:200px;'>

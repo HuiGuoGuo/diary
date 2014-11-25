@@ -50,7 +50,7 @@
           <h1>修改个人信息</h1>
         </div>
       </div>
-      <div class="row-fluid">
+      <div class="row-fluid" id='render_user_information'>
         <div class="span12">
           <div class="box box-color box-bordered">
             <div class="box-title">
@@ -73,11 +73,10 @@
               </ul>
               <div class="tab-content padding tab-content-inline tab-content-bottom">
                 <div class="tab-pane active" id="profile">
-                    <%=form_for @user_information ,:html=>{:class =>"form-horizontal", :multipart => true} do |f| %>
+                  <%=form_for @user_information ,:html=>{:class =>"form-horizontal", :multipart => true, :remote => true} do |f| %>
                     <div class="row-fluid">
                       <div class="span2">
                         <head>个人头像:</head> </br></br>
-                        <% if @user_information.attachment_image.attachment_image.url.blank?%>
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                           <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;"><img src="/assets/demo/user-1.jpg" /></div>
                           <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
@@ -86,15 +85,12 @@
                             <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                           </div>
                         </div>
-                      <%else%>
-                        <img src="<%=@user_information.attachment_image.attachment_image.url%>" width="84px" height="84px">
-                      <%end%>
                     </div>
                     <div class="span10">
                         <div class="control-group">
                           <label for="name" class="control-label right">姓名:</label>
                           <div class="controls">
-                            <%= f.text_field :name  ,:class=>'input-xlarge' ,:value=>"John Doe"%>
+                            <%= f.text_field :name  ,:class=>'input-xlarge'%>
                           </div>
                         </div>
 
@@ -131,7 +127,8 @@
                         <div class="control-group">
                           <label for="name" class="control-label right">个人技能:</label>
                           <div class="controls">
-                            <%= f.text_field :tags,:class=>"tagsinput", :value=>"PHP,Laravel,Java"%>
+                            <%= @user_information.tags%>
+                            <%= f.text_field :tags,:class=>"tagsinput", :value=>@user_information.tags%>
                           </div>
                         </div>
 
@@ -179,7 +176,7 @@
                         </div>
 
                         <div class="form-actions">
-                          <input type="submit" class='btn btn-primary' value="Save">
+                          <input type="submit" class='btn btn-primary' value="确定">
                           <input type="reset" class='btn' value="Discard changes">
                         </div>
                       </div>
@@ -206,7 +203,7 @@
                     </div>
                     <div class="form-actions">
                       <input type="submit" class='btn btn-primary' value="Save">
-                      <input type="reset" class='btn' value="Discard changes">
+                      <input type="reset" class='btn' value="恢复默认">
                     </div>
                   </form>
                 </div>

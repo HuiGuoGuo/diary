@@ -6,7 +6,7 @@ class BlogsController < ApplicationController
     if params[:tag].present?
       @blogs = Blog.tagged_with(params[:tag])
     else
-      @blogs = Blog.all
+      @blogs = Blog.where(user_id: current_user.id)
     end
 
     respond_to do |format|
@@ -47,6 +47,7 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(params[:blog])
     @blog.user_id = current_user.id
+    
     
 
     respond_to do |format|
