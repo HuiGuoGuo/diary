@@ -54,7 +54,7 @@
                 </div>
                 <div style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:200px;'>
                   <p>
-                  <%= blog.context.html_safe%> 
+                  <%= blog.context.html_safe if blog.context %> 
                   </p>
                 </div>
               </div>

@@ -6,7 +6,15 @@ Diary::Application.routes.draw do
     end
   end
 
-  resources :comments
+  resources :comments do
+
+    collection do
+      
+      get 'render_comment'
+
+    end
+
+  end
 
   resources :attachment_images
 
@@ -15,7 +23,12 @@ Diary::Application.routes.draw do
 
   get "home/index"
 
-  resources :blogs
+  resources :blogs do
+    collection do
+
+      get 'render_comment'
+  end
+end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

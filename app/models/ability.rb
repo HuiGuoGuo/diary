@@ -5,11 +5,14 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
       can :manage, :all
+
     elsif user.has_role :customer
+
       can :read, :all
-      can [:destroy, :update, :create], Comment, :user_id => user.id 
-      can :manage, Blog, :user_id => user.id
-      can :manage, UserInformation, :user_id => user.id
+      can :render_comment, Comment 
+      can [ :update, :create], [UserInformation,Blog] ,:user_id => user.id
+      can [ :create,:update,:destroy],Comment, :user_id => user.id
+
     end
   end
 end

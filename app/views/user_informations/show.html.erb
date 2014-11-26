@@ -82,9 +82,11 @@
                           <img src="<%= @user_information.attachment_image.attachment_image.try(:url)%>" width="84px" height="84px">
                         <%end%>
                       </div>
-                      <div class='pull-right'>
-                        <%=link_to  '修改',edit_user_information_path(@user_information)%>
+                      <% if can? :update, @user_information%>
+                        <div class='pull-right'>
+                          <%=link_to  '修改',edit_user_information_path(@user_information)%>
                         </div>
+                      <%end%>
                       <div class="span10">
                         <div class="control-group">
                           <label for="name" class="control-label right">姓名:</label>

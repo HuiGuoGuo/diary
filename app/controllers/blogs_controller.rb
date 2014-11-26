@@ -1,12 +1,12 @@
 class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
-  load_and_authorize_resource
+  load_and_authorize_resource 
   def index
     if params[:tag].present?
-      @blogs = Blog.tagged_with(params[:tag])
+      @blogs = Blog.tagged_with(params[:tag]).paginate(:page => params[:page], :per_page => 10)
     else
-      @blogs = Blog.where(user_id: current_user.id)
+      @blogs = Blog.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 10)
     end
 
     respond_to do |format|
@@ -19,11 +19,11 @@ class BlogsController < ApplicationController
   # GET /blogs/1.json
   def show
     @blog = Blog.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @blog }
     end
+
   end
 
   # GET /blogs/new
@@ -47,8 +47,8 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(params[:blog])
     @blog.user_id = current_user.id
-    
-    
+
+
 
     respond_to do |format|
       if @blog.save
@@ -88,4 +88,17 @@ class BlogsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def render_comment
+
+    @blog = Blog.find(params[:blog_id])
+    @comment = Comment.find(params[:comment_id])
+
+    @comments = @comment.blog.comments.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end

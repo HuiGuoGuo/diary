@@ -1,5 +1,6 @@
 #encoding:utf-8
 class UserInformationsController < ApplicationController
+  load_and_authorize_resource
   before_filter :set_user_information, only: [:show, :edit, :update, :destroy, :render_user_information]
 
   def index
@@ -8,7 +9,10 @@ class UserInformationsController < ApplicationController
   end
 
   def show
-     @user_information = current_user.user_information
+    if params[:id]
+    else
+      @user_information = current_user.user_information
+    end
   end
 
   def new

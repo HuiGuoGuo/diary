@@ -34,7 +34,7 @@ gem 'new_responds_to_parent'
 gem 'paperclip'
 gem 'acts_as_tree'
 gem 'multiselectjs_rails'
-gem 'will_paginate'
+gem 'will_paginate','~>3.0.6' #分页插件
 gem 'ckeditor_rails'    #文本编辑器
 gem 'acts-as-taggable-on'
 gem 'bootstrap-datepicker-rails'

@@ -3,6 +3,6 @@ zh:
     pagination:
       first: "首页"
       last: "尾页"
-      previous: "上一页"
-      next_page: "下一页"
+      previous_label: "上一页"
+      next_label: "下一页"
       truncate: "..."

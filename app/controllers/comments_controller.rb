@@ -4,8 +4,11 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @comments = Comment.all
-    respond_with(@comments)
+
+    @blog = Blog.find(params[:blog_id])
+    @comments = @blog.comments.paginate(:page => params[:page], :per_page => 4).order('created_at desc')
+    respond_with(@comment)
+
   end
 
   def show
@@ -22,12 +25,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    blog = Blog.find(params[:blog_id])
-    user = User.find(params[:user_id])
+    @blog = Blog.find(params[:blog_id])
+    @user = User.find(params[:user_id])
     @comment = Comment.new(params[:comment])
-    @comment.blog_id = blog.id
-    @comment.user_id = user.id
+    @comment.blog_id = @blog.id
+    @comment.user_id = @user.id
     @comment.save
+
+    respond_to do |format|
+      format.html {redirect_to comments_url(blog_id: @blog.id)}
+    end
   end
 
   def update
@@ -40,8 +47,18 @@ class CommentsController < ApplicationController
     respond_with(@comment)
   end
 
-  private
-    def set_comment
-      @comment = Comment.find(params[:id])
+  def render_comment
+
+    @blog = Blog.find(params[:blog_id])
+    @comments = @blog.comments.paginate(:page => params[:page], :per_page => 4).order('created_at desc')
+
+    respond_to do |format|
+      format.js
     end
+  end
+
+  private
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 end
