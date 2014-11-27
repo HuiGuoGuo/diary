@@ -9,10 +9,21 @@
       <div class='comments-content'>
 
         <%= comment.user.try(:username)%>&nbsp;&nbsp;&nbsp;&nbsp;
-        <span style='margin-left:60px;width:300px;'>:&nbsp;<B><%= comment.context.html_safe%></B></span>
+        <div style='margin-left:60px;width:940px;word-break:break-all; overflow:auto;'>:&nbsp;<B><%= comment.context.html_safe%></B></div>
         <span>&nbsp;</span>
+        <div class='pull-right'>
         <span class=" ui-mr10 state"> <%=comment.updated_at.strftime("%H:%M:%S").to_s%></span>
-        <span><%= link_to '回复','#'%></span>
+        <span><%= link_to '回复','#'%>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span>Tables</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>11</li>
+            <li>22</li>
+          </ul>
+        </span>
+      </div>
 
       </div>
 
@@ -24,7 +35,7 @@
   </br>
 
   <br />
-  <div class = 'pull-right '>
+  <div class = 'pull-left '>
     <div class="page_info">
       <span>共&nbsp;<%= @comments.total_pages %>&nbsp;页</span>
       <span>共&nbsp;<%= @comments.total_entries%>&nbsp;条评论</span>    
@@ -40,7 +51,7 @@
   </br>
   </br>
 
-  <div class='pull-right'>
+  <div class='pull-left'>
     <%=form_tag comments_path(:blog_id => @blog.id, :user_id => current_user.id) ,{:method => :post}  do |f| %>
       </br>
       <%= kindeditor :comment, :context,:width => '50',:height => '40',:simple_mode => true%>
@@ -50,4 +61,6 @@
   </div>
 
 </div>
+<style type="text/css">
+</style>
 

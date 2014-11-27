@@ -29,22 +29,22 @@ class UserInformationsController < ApplicationController
     @user_information.attachment_image_id = @image.id
     @user_information.user_id = current_user.id
     @user_information.save
-    respond_to do |format|
-      format.html {redirect_to user_information_path(@user_information),:notice=>'修改成功!'}
-    end
   end
 
   def update
     @user_information.update_attributes(params[:user_information])
 
-    @image = AttachmentImage.new(:attachment_image=> params[:imagefile])
-    @image.save unless params[:imagefile].blank?
+    if params[:imagefile].blank? || params[:imagefile].original_filename.eql?(@user_information.attachment_image.attachment_image_file_name)
 
-    @user_information.attachment_image_id = @image.id
-    @user_information.save 
+    else
+      @image = AttachmentImage.new(:attachment_image=> params[:imagefile])
+      @image.save  
+      @user_information.attachment_image_id = @image.id
+      @user_information.save 
+    end
 
     respond_to  do |format|
-      format.js
+      format.html {redirect_to user_information_path(@user_information)}
     end
 
   end

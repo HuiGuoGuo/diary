@@ -1,3 +1,9 @@
-alert("数据保存成功");
-$.get("render_user_information?id=<%=@user_information.id%>");
+$.gritter.add({
+  image: '/assets/rails.png',
+  title: '提示',
+  time: 5000,
+  sticky: (typeof sticky !== 'undefined') ? sticky : false,
+  text: '资料修改成功!',
+  bottom_left: '100' 
+}); 
 

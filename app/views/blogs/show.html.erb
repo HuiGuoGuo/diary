@@ -17,17 +17,23 @@
   </br>
   </br>
 </div>
+
+<div class='comments-item-bd'style='height:30px;'>
+  <% if can? :update, @blog%>
+    <%= link_to '编辑', edit_blog_path(@blog),:class => 'btn btn-small' %> 
+  <% end%>
+  <%= link_to '返回列表', blogs_path,:class => 'btn btn-small' %>
+</div>
+
 <div class='comments-item-bd'>
 
-  <iframe src='/comments?blog_id=<%=@blog.id%>' id='comment_page' style='width:1000px;height:1500px;overflow:hidden;'>
+  <iframe src='/comments?blog_id=<%=@blog.id%>' id='comment_page' style='width:1000px;height:2100px;overflow:hidden;'>
 
   </iframe>
 </div>
-<%= link_to '编辑', edit_blog_path(@blog),:class => 'btn btn-small' %> 
-<%= link_to '返回列表', blogs_path,:class => 'btn btn-small' %>
 
 <style type='text/css'>
- .blog_context{ /*博文内容样式*/
+  .blog_context{ /*博文内容样式*/
     width:1000px;
     height:800px;
     overflow:auto;

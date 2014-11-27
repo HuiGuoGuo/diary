@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def index
 
     @blog = Blog.find(params[:blog_id])
-    @comments = @blog.comments.paginate(:page => params[:page], :per_page => 4).order('created_at desc')
+    @comments = @blog.comments.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     respond_with(@comment)
 
   end

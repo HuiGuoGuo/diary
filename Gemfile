@@ -38,4 +38,5 @@ gem 'will_paginate','~>3.0.6' #分页插件
 gem 'ckeditor_rails'    #文本编辑器
 gem 'acts-as-taggable-on'
 gem 'bootstrap-datepicker-rails'
+gem "gritter", "1.1.0" #提示插件
 #gem "fullcalendar-rails", :git => "https://github.com/mankind/fullcalendar-rails.git"

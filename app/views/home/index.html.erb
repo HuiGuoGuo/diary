@@ -3,18 +3,44 @@
 
   <div class="site-wrapper margin_every">
     <div class="row-fluid">
+
       <div class='span1'>
-        <div class="pinned note-container" style="width: 262px; left: 1200px; top: 10px; position: fixed;opacity: 0.5;background-size: 100%;"</div>
-        <div class='note' style="color:black;margin-top: 90px;width: 200px;transform: rotate(-6deg);text-decoration: none;padding: 20px;font-size: 18px;display: block;background: none repeat scroll 0 0 #ffc;box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);">
-          <h3>Blog ! !</h3>
-          <p>如果你想新建一个博客</p>
-          <p>记录生活的点点滴滴</p>
-          <p>不妨点击这点试试</br><%=link_to'New',new_blog_path%></p>
+
+        <div class="pinned note-container" style="width: 262px; right: 1400px; top: 10px; position: fixed;opacity: 0.5;background-size: 100%;">
+          <div class='note' style="color:black;margin-top: 90px;width: 200px;transform: rotate(-10deg);text-decoration: none;padding: 20px;font-size: 18px;display: block;background: none repeat scroll 0 0 #ffc;box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);">
+            <h3>Blog ! !</h3>
+            <p>如果你想新建一个博客</p>
+            <p>记录生活的点点滴滴</p>
+            <p>不妨点击这点试试</br><%=link_to'New',new_blog_path%></p>
+          </div>
+        </div>
+
+        <div class='blog-widget'>
+
+          <div class="col-sm-2 col-sm-push-1 "style='width:300px;left: 1000px;'>
+            <div class="list-group tag-sidebar">
+              <a class="list-group-item" href="/home/index">分类:<span class="badge"></span></a>
+              <a class="list-group-item" href="/home/index"><i class="fa fa-tag"></i>GOOD<span class="badge">36</span></a>
+              <a class="list-group-item" href="/home/index"><i class="fa fa-tag"></i>good<span class="badge">36</span></a>
+            </div>
+
+            <div class='subnav tags'style='width:270px;left: 1000px;'>
+              <h4 class='blog-widget-title pull-left'style='margin-top:5px;margin-left:5px;'>标签:</h4> 
+              <ul >
+                <%ActsAsTaggableOn::Tag.limit(100).each do |tag|%>
+                  <li class="tag<%= rand(6)%>">
+                  <%= link_to "#{tag.name}", blogs_path(select: 2, tag: tag.name) %>
+                <%end%>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <div class="span12">
+    <div class="span11">
       <% Blog.all.each do |blog|%>
         <div class="row-fluid" style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;length:100px;' >
           <div class="panel post tag-xin-ban-ben-fa-bu">
@@ -71,11 +97,11 @@
     </div>
   </div>
 </div>
-<div id="footer" style="margin-bottom:0px;opacity: 0.4;color:black;margin-right:500px;margin-left:16px;width:935px;">
+<div id="footer" style="margin-bottom:0px;opacity: 0.8;color:black;margin-right:500px;margin-left:16px;width:935px;">
   <p>
   FLAT - Responsive Admin Template <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">Imprint</a> 
   </p>
-  <a class="gototop" href="#"><i class="icon-arrow-up"></i></a>
+  <a class="gototop" href="#" ><i class="icon-arrow-up"></i></a>
 </div>
 </body>
 

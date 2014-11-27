@@ -289,55 +289,55 @@ a:focus {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 1300px;
 }
 
 .span12 {
-  width: 940px;
+  width: 1200px;
 }
 
 .span11 {
-  width: 860px;
+  width: 1150px;
 }
 
 .span10 {
-  width: 780px;
+  width: 1000px;
 }
 
 .span9 {
-  width: 700px;
+  width: 900px;
 }
 
 .span8 {
-  width: 620px;
+  width: 800px;
 }
 
 .span7 {
-  width: 540px;
+  width: 700px;
 }
 
 .span6 {
-  width: 460px;
+  width: 600px;
 }
 
 .span5 {
-  width: 380px;
+  width: 500px;
 }
 
 .span4 {
-  width: 300px;
+  width: 400px;
 }
 
 .span3 {
-  width: 220px;
+  width: 300px;
 }
 
 .span2 {
-  width: 140px;
+  width: 200px;
 }
 
 .span1 {
-  width: 60px;
+  width: 200px;
 }
 
 .offset12 {
@@ -6165,3 +6165,11 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+* {
+  box-sizing: border-box;
+}
+*:before, *:after {
+  box-sizing: border-box;
+}
+

@@ -79,7 +79,9 @@
                       <div class="span2">
                         <head>个人头像:</head> </br></br>
                         <% if @user_information.attachment_image%>
-                          <img src="<%= @user_information.attachment_image.attachment_image.try(:url)%>" width="84px" height="84px">
+                          <div style='max-width: 200px; max-height: 150px;'>
+                            <img src="<%= @user_information.attachment_image.attachment_image.try(:url)%>" >
+                          </div>
                         <%end%>
                       </div>
                       <% if can? :update, @user_information%>
