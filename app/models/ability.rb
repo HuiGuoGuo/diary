@@ -9,6 +9,7 @@ class Ability
     elsif user.has_role?(:customer) 
 
       can :read, :all
+
       can :render_comment, Comment 
       can [ :update, :create], [UserInformation,Blog] ,:user_id => user.id
       can [ :create,:update,:destroy],Comment, :user_id => user.id

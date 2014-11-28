@@ -11,17 +11,44 @@
   </head>
   <body>
     <div id="navigation">
-      <div class="container-fluid">
-        <div class="user">
-          <%=render 'layouts/header' unless params[:controller] == 'comments' %>
-        </div>
+      <div class="user">
+        <%=render 'layouts/header' unless params[:controller] == 'comments' %>
       </div>
     </div>
-    <%unless params[:controller] =='user_informations' %>
-      <div class='container' > 
-      <%end%>
-      <%=notice%>
-      <%= yield %>
+    <div class = 'containner-fluid'>
+      <div class ='row-fluid'>
+
+        <div class = 'span3'>
+
+
+          <%unless params[:controller] =='comments' %>
+            <div class='note' style="position:fixed;">
+              <div  style='margin-top:40px;margin-left:10px;opacity: 0.9;'>
+                <%=render 'layouts/include/include_clock'%><!--!加载时钟插件 --!>
+              </div>
+            </div>
+          <%end%>
+
+          <!--! 轮播插件--!>
+          <% if params[:controller] == 'home'%>
+            <div  style='margin-top:500px;margin-left:10px;opacity: 0.9;'>
+              <%=render 'layouts/include/carousel'%> 
+            </div>
+          <%end%>
+
+        </div> <!--!左侧边栏完毕 --!>
+
+        <div class='span9'>
+          <%= render "layouts/messages" %><!--!消息通知 --!>
+          <%unless params[:controller] =='user_informations' %>
+            <div class='container ' > 
+            <%end%>
+            <%=notice%>
+            <%= yield %>
+          </div>
+        </div><!--!正文 --!>
+
+      </div>
     </div>
   </body>
 </html>

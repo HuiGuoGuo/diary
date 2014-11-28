@@ -1,0 +1,129 @@
+
+<%=form_for @user_information ,:html=>{:class =>"form-horizontal", :multipart => true} do |f| %>
+  <div class="row-fluid">
+
+    <div class="span2">
+      <head>个人头像:</head> </br></br>
+      <div class="fileupload fileupload-new" data-provides="fileupload">
+        <% if @user_information.attachment_image.blank?%>
+          <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;"><img src="/assets/demo/user-1.jpg" />
+          </div>
+        <%else%>
+          <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;"><img src="<%= @user_information.attachment_image.attachment_image.try(:url)%>" />
+          </div>
+        <%end%>
+        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+        </div>
+        <div>
+          <span class="btn btn-file"><span class="fileupload-new">选择头像</span><span class="fileupload-exists">修改</span><input type="file" name='imagefile' /></span>
+          <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="span10">
+      <div class="control-group">
+        <label for="name" class="control-label right">姓名:</label>
+        <div class="controls">
+          <%= f.text_field :name  ,:class=>'input-xlarge'%>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="email" class="control-label right">年龄:</label>
+        <div class="controls">
+          <%= f.text_field :age ,:class=>"spinner input-mini"%>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="email" class="control-label right">性别:</label>
+        <div class="controls">
+          <%= f.radio_button :sex,'boy' %>男
+          <%= f.radio_button :sex ,'girl' %>女
+          <%= f.radio_button :sex,'unknow' %>不明
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="email" class="control-label right">生日:</label>
+        <div class="controls">
+          <%= f.text_field :birth,:class=>'datepicker' %>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="pw" class="control-label right">婚姻状况:</label>
+        <div class="controls">
+          <%= f.select :marry ,UserInformation.get_marry_select_options,{},:class=>'select2-me input-large'%>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="name" class="control-label right">个人技能:</label>
+        <div class="controls">
+          <%= f.text_field :tags,:class=>"tagsinput", :value=>@user_information.tags%>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="control-group">
+        <label for="country" class="control-label right">国籍:</label>
+        <div class="controls">
+          <%= f.select :country,UserInformation.get_country_select_options, {'data-placeholder'=>"Please select something"},:class=>'select2-me input-large'%>
+        </select>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="control-group">
+      <label for="pw" class="control-label right">电话:</label>
+      <div class="controls">
+        <%= f.text_field :phone %>
+      </div>
+    </div>
+
+    <hr/>
+    <div class="control-group">
+      <label for="pw" class="control-label right">QQ:</label>
+      <div class="controls">
+        <%= f.text_field :qq%>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="control-group">
+      <label for="pw" class="control-label right">个人地址:</label>
+      <div class="controls">
+        <%= f.text_field :address%>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="control-group">
+      <label for="pw" class="control-label right">个性说明:</label>
+      <div class="controls">
+        <%= f.text_field :individuality_explanation%>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="control-group">
+      <label for="pw" class="control-label right">自我介绍:</label>
+      <div class="controls">
+        <%= f.kindeditor :introduce %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <input type="submit" class='btn btn-primary' value="保存">
+      <input type="reset" class='btn' value="恢复默认">
+    </div>
+
+  </div>
+<% end %>

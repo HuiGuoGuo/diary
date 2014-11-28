@@ -19,13 +19,14 @@ class DeviseCustomed::RegistrationsController < Devise::RegistrationsController
         user_information.user_id = @user.id
         user_information.save
 
-        format.html { redirect_to new_session_path(:user), notice: '创建用户成功.' }
+        format.html { redirect_to new_session_path(:user), :notice =>'创建用户成功.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # GET /resource/sign_up
@@ -45,6 +46,18 @@ class DeviseCustomed::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
+   def update
+
+     @user = User.find(params[:id])
+     @user.update_attributes(params[:user])
+     @user_information = @user.user_information
+
+     respond_to do |format|
+
+       format.html {redirect_to new_session_path(:user,:audit => 'restart')}
+
+     end
+   end
   # def update
   #   super
   # end
