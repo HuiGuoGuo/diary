@@ -11,32 +11,36 @@
   </li>
 </ul>
 <span class="navbar-text pull-right" style="font-size: 14px">
-  <% if user_signed_in? %>
-    <ul class="icon-nav">
-      <li class="dropdown sett">
-      <a > 欢迎您!</a>
+  <%= link_to "中文版", :controller => controller.controller_name, 
+    :action => controller.action_name, :locale => "zh"	%>
+    <%= link_to "English", :controller => controller.controller_name, 
+      :action => controller.action_name, :locale => "en" %>
+      <% if user_signed_in? %>
+        <ul class="icon-nav">
+          <li class="dropdown sett">
+          <a > 欢迎您!</a>
 
-      </li>
-      <li class="dropdown">
-      <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-user"></i> <%= current_user.try(:username )%></a>
-      <ul class="dropdown-menu pull-right">
-        <li>
-        </li>
-        <li>
-        <% if current_user.user_information %>
-          <a href="/user_informations/<%=current_user.user_information.id%>">个人中心</a>
-        <%else%>
-          <a href="/user_informations/new">添加个人信息</a>
-        <%end%>
-        </li>
-        <li>
-        <%= link_to 'Logout', destroy_user_session_path, :style => "font-size: 14px" %>
-        </li>
-      </ul>
-      </li>
-    </ul>
-  <%else%>
-    <%= link_to '登陆', new_session_path(:user)%> &nbsp;&nbsp;&nbsp;&nbsp;
-    <%= link_to '注册', new_registration_path(:user) %>
-  <% end %>
-</span>
+          </li>
+          <li class="dropdown">
+          <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-user"></i> <%= current_user.try(:username )%></a>
+          <ul class="dropdown-menu pull-right">
+            <li>
+            </li>
+            <li>
+            <% if current_user.user_information %>
+              <a href="/user_informations/<%=current_user.user_information.id%>">个人中心</a>
+            <%else%>
+              <a href="/user_informations/new">添加个人信息</a>
+            <%end%>
+            </li>
+            <li>
+            <%= link_to 'Logout', destroy_user_session_path, :style => "font-size: 14px" %>
+            </li>
+          </ul>
+          </li>
+        </ul>
+      <%else%>
+        <%= link_to '登陆', new_session_path(:user)%> &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to '注册', new_registration_path(:user) %>
+      <% end %>
+    </span>

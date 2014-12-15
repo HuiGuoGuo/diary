@@ -31,7 +31,7 @@
       </div>
 
     <div class="span11">
-      <% Blog.all.each do |blog|%>
+      <% Blog.limit(20).each do |blog|%>
         <div class="row-fluid" style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;length:100px;' >
           <div class="panel post tag-xin-ban-ben-fa-bu">
             <div class="preview-img">
