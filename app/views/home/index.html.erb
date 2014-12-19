@@ -6,92 +6,88 @@
 
       <div class='span1'>
 
-
-
-          <div class="col-sm-2 col-sm-push-1 "style='width:300px;left: 1000px;'>
-            <div class="list-group tag-sidebar">
-              <a class="list-group-item" href="/home/index">分类:<span class="badge"></span></a>
-              <a class="list-group-item" href="/home/index"><i class="fa fa-tag"></i>GOOD<span class="badge">36</span></a>
-              <a class="list-group-item" href="/home/index"><i class="fa fa-tag"></i>good<span class="badge">36</span></a>
-            </div>
-
-            <div class='subnav tags'style='width:270px;left: 1000px;'>
-              <h4 class='blog-widget-title pull-left'style='margin-top:5px;margin-left:5px;'>标签:</h4> 
-              <ul >
-                <%ActsAsTaggableOn::Tag.limit(100).each do |tag|%>
-                  <li class="tag<%= rand(6)%>">
-                  <%= link_to "#{tag.name}", blogs_path(select: 2, tag: tag.name) %>
-                <%end%>
-                </li>
-              </ul>
-            </div>
-
+        <div class="col-sm-2 col-sm-push-1 "style='width:300px;left: 1000px;'>
+          <div class="list-group tag-sidebar">
+            <a class="list-group-item" href="/home/index">分类:<span class="badge"></span></a>
+            
+            <a class="list-group-item" href="/home/index"><i class="fa fa-tag"></i>good<span class="badge">36</span></a>
           </div>
 
-      </div>
-
-    <div class="span11">
-      <% Blog.limit(20).each do |blog|%>
-        <div class="row-fluid" style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;length:100px;' >
-          <div class="panel post tag-xin-ban-ben-fa-bu">
-            <div class="preview-img">
-              <a href = ''><img alt ='' src=''></a>
-              <div class='post-context'style='color:#333;margin-left:20px;margin-top:20px;'>
-                <h3 class='post-title'style='color:white'><%=link_to blog.title ,blog_path(blog),:method => :get%></h3>
-                </br>
-                </br>
-                <div class="post-meta">
-                  <span class="date">
-                    <i class="icon-calendar"></i>
-                    <%=blog.created_at.strftime("%Y-%m-%d")%>
-                  </span>
-                  <span class="comments">
-                    <i class="icon-comments"></i>
-                    <a href="<%=blog_path(blog)%>"><%=blog.try(:comments).count%>评论</a>
-                  </span>
-                  <span class="tags">
-                    <i class="icon-tag"></i>
-                    <%if blog.tags.blank?%>
-                      <%= '无标签'%>
-                    <%else%>
-                      <% blog.tag_list.each do |tag|%>
-                        <%=link_to tag,blogs_url(tag: tag)%>
-                      <%end%>
-                    <%end%>
-                  </span>
-                  <span class="author">
-                    <i class="icon-user"></i>
-                    <% if blog.user.blank?%>
-                      <%= '匿名' %>
-                    <%else%>
-                      <%= link_to blog.user.username, user_information_path(:id => blog.user.user_information.id)%>
-                    <%end%>
-                  </span>
-                </div>
-                <div style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:200px;'>
-                  <p>
-                  <%= blog.context.html_safe if blog.context %> 
-                  </p>
-                </div>
-              </div>
-            </div>
-            <section class="panel-footer post-meta">
-            <div class="post-tags">
-              <i class="fa fa-tags"></i>
-              <%= link_to '查看更多请点击这里。。。',blog_path(blog)%>
-            </div>
-            </section>
+          <div class='subnav tags'style='width:270px;left: 1000px;'>
+            <h4 class='blog-widget-title pull-left'style='margin-top:5px;margin-left:5px;'>标签:</h4> 
+            <ul >
+              <%ActsAsTaggableOn::Tag.limit(100).each do |tag|%>
+                <li class="tag<%= rand(6)%>">
+                <%= link_to "#{tag.name}", blogs_path(select: 2, tag: tag.name) %>
+              <%end%>
+              </li>
+            </ul>
           </div>
         </div>
-      <%end%>
+      </div>
+
+      <div class="span11">
+        <% Blog.limit(20).order("created_at desc").each do |blog|%>
+          <div class="row-fluid" style='white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;length:100px;' >
+            <div class="panel post tag-xin-ban-ben-fa-bu">
+              <div class="preview-img">
+                <a href = ''><img alt ='' src=''></a>
+                <div class='post-context'style='color:#333;margin-left:20px;margin-top:20px;'>
+                  <h3 class='post-title'style='color:white'><%=link_to blog.title ,blog_path(blog),:method => :get%></h3>
+                  </br>
+                  </br>
+                  <div class="post-meta">
+                    <span class="date">
+                      <i class="icon-calendar"></i>
+                      <%=blog.created_at.strftime("%Y-%m-%d")%>
+                    </span>
+                    <span class="comments">
+                      <i class="icon-comments"></i>
+                      <a href="<%=blog_path(blog)%>"><%=blog.try(:comments).count%>评论</a>
+                    </span>
+                    <span class="tags">
+                      <i class="icon-tag"></i>
+                      <%if blog.tags.blank?%>
+                        <%= '无标签'%>
+                      <%else%>
+                        <% blog.tag_list.each do |tag|%>
+                          <%=link_to tag,blogs_url(tag: tag)%>
+                        <%end%>
+                      <%end%>
+                    </span>
+                    <span class="author">
+                      <i class="icon-user"></i>
+                      <% if blog.user.blank?%>
+                        <%= '匿名' %>
+                      <%else%>
+                        <%= link_to blog.user.username, user_information_path(:id => blog.user.user_information.id)%>
+                      <%end%>
+                    </span>
+                  </div>
+                  <div style='white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:200px;'>
+                    <p>
+                    <%= blog.context.html_safe if blog.context %> 
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <section class="panel-footer post-meta">
+              <div class="post-tags">
+                <i class="fa fa-tags"></i>
+                <%= link_to '查看更多请点击这里。。。',blog_path(blog)%>
+              </div>
+              </section>
+            </div>
+          </div>
+        <%end%>
+      </div>
     </div>
   </div>
-</div>
-<div id="footer" style="margin-bottom:0px;opacity: 0.8;color:black;margin-right:500px;margin-left:100px;width:900px;">
-  <p>
-  FLAT - Responsive Admin Template <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">Imprint</a> 
-  </p>
-  <a class="gototop" href="#" ><i class="icon-arrow-up"></i></a>
-</div>
+  <div id="footer" style="margin-bottom:0px;opacity: 0.8;color:black;margin-right:500px;margin-left:100px;width:900px;">
+    <p>
+    FLAT - Responsive Admin Template <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">Imprint</a> 
+    </p>
+    <a class="gototop" href="#" ><i class="icon-arrow-up"></i></a>
+  </div>
 </body>
 

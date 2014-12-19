@@ -3,10 +3,11 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   load_and_authorize_resource 
   def index
+
     if params[:tag].present?
       @blogs = Blog.tagged_with(params[:tag]).paginate(:page => params[:page], :per_page => 10)
     else
-      @blogs = Blog.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 10)
+      @blogs = Blog.where(user_id: "#{current_user.id}").paginate(:page => params[:page], :per_page => 10)
     end
 
     respond_to do |format|
@@ -23,6 +24,7 @@ class BlogsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @blog }
     end
+    
 
   end
 

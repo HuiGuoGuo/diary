@@ -20,8 +20,20 @@ Diary::Application.routes.draw do
 
   #  devise_for :users
   devise_for :users, :controllers => {:registrations => "devise_customed/registrations",:sessions => "devise_customed/sessions"}
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
 
   get "home/index"
+
+#  match  '/logout' => "devise/sessions#destroy" #定制退出页
+  #  定制登录等界面
+  devise_scope :user do
+    get "login", :to => "devise/sessions#new"
+    get "register", :to => "devise/registrations#new"
+    get "logout", :to => "devise/sessions#destroy"
+    get "profile", :to => "devise/registrations#edit"
+  end
+
+  root :to => 'home#index' #定制首页
 
   resources :blogs do
     collection do
@@ -79,7 +91,6 @@ end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

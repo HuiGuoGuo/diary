@@ -22,10 +22,10 @@ class Blog < ActiveRecord::Base
     self.tag_list=tag.split(",")
   end
 
-  WillPaginate.per_page = 3
 
   def blog
     self.per_page = 3
   end
+
 
 end

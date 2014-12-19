@@ -1,10 +1,10 @@
 <link type="text/css" rel="stylesheet" media="all" href="/assets/style__not-minified.css?body=1" data-turbolinks-track="true">
 <ul class="nav" >
   <li >
-  <a href="/home/index">首页</a>
+  <a href="<%= root_path%>">首页</a>
   </li>
   <li>
-  <a href="/blogs">博客列表</a>
+  <a href="<%=blogs_path%>">博客列表</a>
   </li>
   <li>
   <a href="#">联系我哟</a>
@@ -34,13 +34,13 @@
             <%end%>
             </li>
             <li>
-            <%= link_to 'Logout', destroy_user_session_path, :style => "font-size: 14px" %>
+            <%= link_to '登出', "/logout", :style => "font-size: 14px" %>
             </li>
           </ul>
           </li>
         </ul>
       <%else%>
-        <%= link_to '登陆', new_session_path(:user)%> &nbsp;&nbsp;&nbsp;&nbsp;
-        <%= link_to '注册', new_registration_path(:user) %>
+        <%= link_to '登陆', "/login"%> &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to '注册', "/register" %>
       <% end %>
     </span>
